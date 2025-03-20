@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import AuthContext from "../Component/context/AuthContext"; // Import AuthContext
+import AuthContext from "../Component/context/Authcontext"; // Import AuthContext
 import { toast, ToastContainer } from "react-toastify";
 
 const UpdateUser = () => {
