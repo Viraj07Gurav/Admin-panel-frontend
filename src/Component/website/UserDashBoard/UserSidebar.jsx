@@ -4,7 +4,7 @@ import { Home, Users, Settings, LogOut, Menu } from "lucide-react";
 import { useNavigate } from "react-router";
 import WebsiteContext from "../../context/WebsiteContext";
 import AuthContext from "../../context/Authcontext";
-import UserContext from "../../context/userContext";
+import UserContext from "../../context/UserContext";
 
 
 export default function UserSidebar() {

@@ -3,7 +3,7 @@ import WebsiteContext from "../../context/WebsiteContext";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { CodeSquare } from "lucide-react";
-import UserContext from "../../context/userContext";
+import UserContext from "../../context/UserContext";
 
 
 
