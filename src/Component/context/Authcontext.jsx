@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     const [message, setMessage] = useState("Loading...");
     const BASE_URL="mysql://root:pMtnCKLtarRCGtxyvjJKMnGmdpMOHErk@mysql.railway.internal:3306/railway"
     useEffect(() => {
-        axios.get("http://localhost:5000/new")
+        axios.get("https://admin-panel-backend-3g6u.onrender.comnew")
             .then(response => setMessage(response.data.message))
             .catch(error => console.error("Error connecting to backend:", error));
     }, []);
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     // Register function
     const register = async (username, email, password) => {
         try {
-            const res = await axios.post("http://localhost:5000/users", { username, email, password });
+            const res = await axios.post("https://admin-panel-backend-3g6u.onrender.comusers", { username, email, password });
             console.log(res); // Show success message
             return { success: true, message: res.data.message };
         } catch (error) {
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     //     try {
     //         console.log(" Attempting login with:", email);
 
-    //         const res = await axios.post("http://localhost:5000/login", { email, password });
+    //         const res = await axios.post("https://admin-panel-backend-3g6u.onrender.com/login", { email, password });
 
     //         console.log("Server Response:", res.status, res.data);
 
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
         try {
             console.log("Attempting login with:", email);
 
-            const res = await axios.post("http://localhost:5000/login", { email, password });
+            const res = await axios.post("https://admin-panel-backend-3g6u.onrender.comlogin", { email, password });
             console.log("login response", res)
 
             console.log("Server Response:", res.status, res.data);
@@ -131,7 +131,7 @@ export const AuthProvider = ({ children }) => {
     /// update delete and get user form db and display in dashboard
     const fetchUsers = async () => {
         try {
-            const response = await fetch("mysql://root:pMtnCKLtarRCGtxyvjJKMnGmdpMOHErk@mysql.railway.internal:3306/railway/user");
+            const response = await fetch("https://admin-panel-backend-3g6u.onrender.comuser");
             const data = await response.json();
             console.log("datauser", data)
             setUsers(data);
@@ -145,7 +145,7 @@ export const AuthProvider = ({ children }) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this user?");
         if (confirmDelete) {
             try {
-                await fetch(`http://localhost:5000/${id}`, { method: "DELETE" });
+                await fetch(`https://admin-panel-backend-3g6u.onrender.com${id}`, { method: "DELETE" });
                 setUsers(users.filter(user => user.id !== id));
             } catch (error) {
                 console.error("Error deleting user:", error);
@@ -156,7 +156,7 @@ export const AuthProvider = ({ children }) => {
     // Fetch user by ID
     const getUserById = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/${id}`);
+            const res = await fetch(`https://admin-panel-backend-3g6u.onrender.com${id}`);
             console.log("getuser", res)
             const data = await res.json();
             console.log("data", data)
@@ -170,7 +170,7 @@ export const AuthProvider = ({ children }) => {
     // Update user details
     const updateUser = async (id, updatedUser, navigate) => {
         try {
-            const check = await fetch(`http://localhost:5000/${id}`, {
+            const check = await fetch(`https://admin-panel-backend-3g6u.onrender.com/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatedUser),

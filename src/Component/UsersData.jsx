@@ -6,7 +6,7 @@ function UsersData() {
     const [count, setCount] = useState(0)
     const navigate = useNavigate();
     useEffect(() => {
-        fetch("http://localhost:5000/users")
+        fetch("https://admin-panel-backend-3g6u.onrender.com/users")
             .then(res => res.json())
             .then(data => setUsers(data))
             .catch(err => console.error("Error fetching users:", err));

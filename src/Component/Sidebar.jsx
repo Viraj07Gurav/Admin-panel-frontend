@@ -27,7 +27,7 @@ export default function Sidebar() {
 
   // Fetch all users when the component loads
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://admin-panel-backend-3g6u.onrender.com/users")
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error("Error fetching users:", err));

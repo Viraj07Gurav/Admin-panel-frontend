@@ -55,7 +55,7 @@ export default function Carousel() {
       {images.length > 0 && (
         <>
           <img
-            src={`http://localhost:5000${images[currentIndex]}`} // Append base URL
+            src={`https://admin-panel-backend-3g6u.onrender.com${images[currentIndex]}`} // Append base URL
             alt="Carousel"
             className="w-full h-full rounded-lg shadow-md"
           />

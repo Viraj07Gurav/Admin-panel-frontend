@@ -12,7 +12,7 @@ const Services = ({color}) => { // accepting props from Mainpage.jsx
 
     const getService = async () => {
         try {
-            const response = await fetch("http://localhost:5000/service/1"); // Fetch service with id = 1
+            const response = await fetch("https://admin-panel-backend-3g6u.onrender.com/service/1"); // Fetch service with id = 1
             if (response.ok) {
                 const data = await response.json();
                 console.log("Service Data:", data); // Use this data in your UI

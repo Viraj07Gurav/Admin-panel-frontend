@@ -9,7 +9,7 @@ function UpdateService({ isServiceModalopen, closeServiceModal }) {
 
     const updateService = async () => {
         try {
-            const response = await axios.post("http://localhost:5000/service", { title });
+            const response = await axios.post("https://admin-panel-backend-3g6u.onrender.com/service", { title });
 
             if (response.status === 200) {
                 toast.success("Title updated successfully!");

@@ -22,7 +22,7 @@ export function WebsiteProvider({ children }) {
 
   // const updateAboutus = async (title,descAboutus,image) => {
   //    // console.log("adminupdated data", aboutus);
-  //   const res = await axios.post("http://localhost:5000/update", {title,descAboutus,image });
+  //   const res = await axios.post("https://admin-panel-backend-3g6u.onrender.com/update", {title,descAboutus,image });
   //   console.log("About us updated");
   //   if (res.status === 200) {
   //     console.log("About us updated");
@@ -38,7 +38,7 @@ export function WebsiteProvider({ children }) {
       formData.append("descAboutus", descAboutus);
       formData.append("image", imageFile); // Append the image file
 
-      const res = await axios.post("http://localhost:5000/update", formData, {
+      const res = await axios.post("https://admin-panel-backend-3g6u.onrender.com/update", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Important for file upload
         },
@@ -67,7 +67,7 @@ export function WebsiteProvider({ children }) {
       formData.append("altName", altName);
       // formData.append("selectedColor", selectedColor);
 
-      const res = await axios.post("http://localhost:5000/logo", formData, {
+      const res = await axios.post("https://admin-panel-backend-3g6u.onrender.com/logo", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Required for file uploads
         },
@@ -92,7 +92,7 @@ export function WebsiteProvider({ children }) {
     carouselImages.forEach(file => formData.append("carousel", file));
 
     try {
-      const res = await axios.post("http://localhost:5000/carousel", formData, {
+      const res = await axios.post("https://admin-panel-backend-3g6u.onrender.com/carousel", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Carousel updated successfully!");
@@ -105,7 +105,7 @@ export function WebsiteProvider({ children }) {
   //fetch last recordd for abbout us section get method to display data on website
   const fetchLastRecord = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/lastrecord");
+      const response = await axios.get("https://admin-panel-backend-3g6u.onrender.com/lastrecord");
       const data = await response.data;
       console.log("lastrecord", data)
       if (response.status === 200) {
@@ -124,7 +124,7 @@ export function WebsiteProvider({ children }) {
   //=======fetch logo from database and display 
   // const fetchLastLogo = async () => {
   //   try {
-  //     const response = await axios.get("http://localhost:5000/fetchLogo", {
+  //     const response = await axios.get("https://admin-panel-backend-3g6u.onrender.com/fetchLogo", {
   //       responseType: "blob", // Fetch as binary image
   //     });
 
@@ -144,7 +144,7 @@ export function WebsiteProvider({ children }) {
 
   const fetchLastLogo = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/fetchLogo");
+      const response = await axios.get("https://admin-panel-backend-3g6u.onrender.com/fetchLogo");
 
       console.log("API Response:", response.data); // ✅ Check if API returns correct JSON
 
@@ -164,7 +164,7 @@ export function WebsiteProvider({ children }) {
 
   const fetchCarouselImages = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/fetchCarouselImages");
+      const response = await axios.get("https://admin-panel-backend-3g6u.onrender.com/fetchCarouselImages");
       console.log("response carousel", response);
 
       if (response.status === 200) {
@@ -181,7 +181,7 @@ export function WebsiteProvider({ children }) {
 //============= service section description updated====================
 const updateService = async (title) => {
   try {
-      const response = await post("http://localhost:5000/service", {title});
+      const response = await post("https://admin-panel-backend-3g6u.onrender.com/service", {title});
 
       const data = await response.json();
       if(response.status===200){
@@ -194,7 +194,7 @@ const updateService = async (title) => {
 };
   // const fetchCarouselImages = async () => {
   //   try {
-  //     const response = await axios.get("http://localhost:5000/fetchCarouselImages");
+  //     const response = await axios.get("https://admin-panel-backend-3g6u.onrender.com/fetchCarouselImages");
   //     console.log("response carousel", response);
 
   //     if (response.status === 200) {
@@ -231,7 +231,7 @@ const updateService = async (title) => {
 
     setColor(color);
     localStorage.setItem("bgcolor", color);
-    // axios.post("http://localhost:5000/updateColor", {color})
+    // axios.post("https://admin-panel-backend-3g6u.onrender.com/updateColor", {color})
     // .then(response => console.log(response.data.message))
     // .catch(error => console.error("Error updating color:", error));
   }
@@ -262,7 +262,7 @@ const updateService = async (title) => {
 
     // Send updated colors to server
     axios
-      .post("http://localhost:5000/updateColor", updatedColors)
+      .post("https://admin-panel-backend-3g6u.onrender.com/updateColor", updatedColors)
       .then((response) => console.log(response.data.message),
     fetchcolor())
       .catch((error) => console.error("Error updating color:", error));
@@ -270,7 +270,7 @@ const updateService = async (title) => {
 
 
   const fetchcolor = () => {
-    axios.get("http://localhost:5000/getColors")
+    axios.get("https://admin-panel-backend-3g6u.onrender.com/getColors")
       .then(response => {
         setColorFromdb((prev)=>response.data);
 

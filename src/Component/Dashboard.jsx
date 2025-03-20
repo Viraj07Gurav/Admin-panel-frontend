@@ -27,7 +27,7 @@ const Dashboard = () => {
     console.log("usethem", color);
     // Fetch all users when the component loads
     useEffect(() => {
-        fetch("http://localhost:5000/users")
+        fetch("https://admin-panel-backend-3g6u.onrender.com/users")
             .then(res => res.json())
             .then(data => setUsers(data))
             .catch(err => console.error("Error fetching users:", err));
@@ -37,7 +37,7 @@ const Dashboard = () => {
     // Handle Delete User
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
-            await fetch(`http://localhost:5000/users/${id}`, { method: "DELETE" });
+            await fetch(`https://admin-panel-backend-3g6u.onrender.com/users/${id}`, { method: "DELETE" });
             setUsers(users.filter(user => user.id !== id)); // Remove user from UI
         }
     };
