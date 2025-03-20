@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     const [message, setMessage] = useState("Loading...");
     const BASE_URL="mysql://root:pMtnCKLtarRCGtxyvjJKMnGmdpMOHErk@mysql.railway.internal:3306/railway"
     useEffect(() => {
-        axios.get("https://admin-panel-backend-3g6u.onrender.comnew")
+        axios.get("https://admin-panel-backend-3g6u.onrender.com/new")
             .then(response => setMessage(response.data.message))
             .catch(error => console.error("Error connecting to backend:", error));
     }, []);
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     // Register function
     const register = async (username, email, password) => {
         try {
-            const res = await axios.post("https://admin-panel-backend-3g6u.onrender.comusers", { username, email, password });
+            const res = await axios.post("https://admin-panel-backend-3g6u.onrender.com/users", { username, email, password });
             console.log(res); // Show success message
             return { success: true, message: res.data.message };
         } catch (error) {
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
         try {
             console.log("Attempting login with:", email);
 
-            const res = await axios.post("https://admin-panel-backend-3g6u.onrender.comlogin", { email, password });
+            const res = await axios.post("https://admin-panel-backend-3g6u.onrender.com/login", { email, password });
             console.log("login response", res)
 
             console.log("Server Response:", res.status, res.data);
@@ -131,7 +131,7 @@ export const AuthProvider = ({ children }) => {
     /// update delete and get user form db and display in dashboard
     const fetchUsers = async () => {
         try {
-            const response = await fetch("https://admin-panel-backend-3g6u.onrender.comuser");
+            const response = await fetch("https://admin-panel-backend-3g6u.onrender.com/user");
             const data = await response.json();
             console.log("datauser", data)
             setUsers(data);
@@ -170,7 +170,7 @@ export const AuthProvider = ({ children }) => {
     // Update user details
     const updateUser = async (id, updatedUser, navigate) => {
         try {
-            const check = await fetch(`https://admin-panel-backend-3g6u.onrender.com/${id}`, {
+            const check = await fetch(`https://admin-panel-backend-3g6u.onrender.com${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatedUser),

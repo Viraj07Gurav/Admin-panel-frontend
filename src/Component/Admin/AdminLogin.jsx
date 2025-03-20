@@ -13,7 +13,7 @@ export default function AdminLogin() {
         e.preventDefault(); // Prevent default form submission
 
         try {
-            const res = await axios.post("http://localhost:5000/admin/login", {
+            const res = await axios.post("https://admin-panel-backend-3g6u.onrender.com/admin/login", {
                 email,
                 password,
             });
