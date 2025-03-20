@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import WebsiteContext from "../context/WebsiteContext";
 import logo_img from "../../assets/default_logo.png";
+
 import { useNavigate } from "react-router";
 
 
@@ -51,14 +52,14 @@ export default function Navbar() {
   console.log("colorFromdb",colorFromdb);
 
   return (
-    <nav className={`${colorFromdb.headercolor||dblogo.selectedColor||'bg-blue-400'} p-4 shadow-md`}>
+    <nav className={`${colorFromdb.headercolor||dblogo.selectedColor||'bg-blue-400'} p-4 shadow-md fixed top-0 right-0 left-0 z-10`}>
       <div className="container mx-auto flex justify-between items-center">
         <div className="h-10 w-20">
           <img src={dblogo.image || logo_img} alt="" className="w-25 h-15 rounded-md" />
         </div>
 
-        <ul className="hidden md:flex space-x-6 text-white">
-          <NavItem name="Home" />
+        <ul className="hidden md:flex space-x-15 text-white">
+          <NavItem className=" " name="Home" />
           <NavItem name="About Us" />
           <NavItem name="Services" />
           {token && <NavItem name="Dashboard" onClick={handleDashboard}/>} 
@@ -87,7 +88,7 @@ export default function Navbar() {
 
 function NavItem({ name, onClick }) {
   return (
-    <li className="cursor-pointer font-semibold hover:text-gray-300" onClick={onClick}>
+    <li className="cursor-pointer font-semibold hover:text-gray-600 hover:scale-110" onClick={onClick}>
       {name}
     </li>
   );

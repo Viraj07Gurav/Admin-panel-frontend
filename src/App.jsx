@@ -22,6 +22,9 @@ import AdminRoutes from './Component/Routes/AdminRoutes'
 import UserRoutes from './Component/Routes/UserRoutes'
 import "aos/dist/aos.css";
 import AOS from "aos";
+import AdminLogin from './Component/Admin/AdminLogin'
+import UserContext, { UserContextProvider } from './Component/context/userContext'
+
 
 function App() {
   useEffect(() => {
@@ -36,6 +39,7 @@ function App() {
   return (
     <AuthProvider>
       <WebsiteProvider>
+      <UserContextProvider>
       <BrowserRouter>
       
    
@@ -47,6 +51,7 @@ function App() {
       
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<Register/>} />
+     
 
         {/* <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
        
@@ -69,7 +74,7 @@ function App() {
       </div>
       <Aboutus/>
       <Footer/> */}
-       
+       </UserContextProvider>
       </WebsiteProvider>
    </AuthProvider>
   )

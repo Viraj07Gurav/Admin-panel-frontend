@@ -15,9 +15,9 @@ export function WebsiteProvider({ children }) {
   const [dblogo, setDblogo] = useState("")
   const [carousel, setCarousel] = useState([]);
   const bgcolor = localStorage.getItem("bgcolor");
-  const [colorFromdb,setColorFromdb]=useState("");
+  const [colorFromdb, setColorFromdb] = useState("");
 
-console.log("colorfromdbcontext",colorFromdb);
+  console.log("colorfromdbcontext", colorFromdb);
   console.log("context", logo);
 
   // const updateAboutus = async (title,descAboutus,image) => {
@@ -158,7 +158,7 @@ console.log("colorfromdbcontext",colorFromdb);
     }
   };
 
-  console.log('cdscnj', dblogo)
+  console.log('fetch logo from databse', dblogo)
 
   //=========== fetch craousel images ==============//
 
@@ -178,7 +178,20 @@ console.log("colorfromdbcontext",colorFromdb);
       console.error("Error fetching carousel images", error);
     }
   };
+//============= service section description updated====================
+const updateService = async (title) => {
+  try {
+      const response = await post("http://localhost:5000/service", {title});
 
+      const data = await response.json();
+      if(response.status===200){
+        console.log("update successfully");
+      }
+  } catch (error) {
+      console.error("Error:", error);
+    
+  }
+};
   // const fetchCarouselImages = async () => {
   //   try {
   //     const response = await axios.get("http://localhost:5000/fetchCarouselImages");
@@ -225,49 +238,50 @@ console.log("colorfromdbcontext",colorFromdb);
 
 
   // Declare state variables
-const [bgColor, setBgColor] = useState("");
-const [headerColor, setHeaderColor] = useState("");
-const [sidebarColor, setSidebarColor] = useState("");
+  const [bgColor, setBgColor] = useState("");
+  const [headerColor, setHeaderColor] = useState("");
+  const [sidebarColor, setSidebarColor] = useState("");
+  const[footercolor,setFooterColor]=useState("")
 
-const updateColor = (type, color) => {
-  // Update state first
-  if (type === "bgcolor") setBgColor(color);
-  if (type === "headercolor") setHeaderColor(color);
-  if (type === "sidebarcolor") setSidebarColor(color);
+  const updateColor = (type, color) => {
+    // Update state first
+    if (type === "bgcolor") setBgColor(color);
+    if (type === "headercolor") setHeaderColor(color);
+    if (type === "sidebarcolor") setSidebarColor(color);
+    if(type==="footercolor") setFooterColor(color);
 
-  // Use updated state values after setting state
-  const updatedColors = {
-    bgcolor: type === "bgcolor" ? color : bgColor,
-    headercolor: type === "headercolor" ? color : headerColor,
-    sidebarcolor: type === "sidebarcolor" ? color : sidebarColor,
+    // Use updated state values after setting state
+    const updatedColors = {
+      bgcolor: type === "bgcolor" ? color : bgColor,
+      headercolor: type === "headercolor" ? color : headerColor,
+      sidebarcolor: type === "sidebarcolor" ? color : sidebarColor,
+      footercolor:type==="footercolor"?color:footercolor,
+    };
+
+    console.log("Updated Colors:", updatedColors);
+
+    // Send updated colors to server
+    axios
+      .post("http://localhost:5000/updateColor", updatedColors)
+      .then((response) => console.log(response.data.message),
+    fetchcolor())
+      .catch((error) => console.error("Error updating color:", error));
   };
 
-  console.log("Updated Colors:", updatedColors);
 
-  // Send updated colors to server
-  axios
-    .post("http://localhost:5000/updateColor", updatedColors)
-    .then((response) => console.log(response.data.message))
-    .catch((error) => console.error("Error updating color:", error));
-};
+  const fetchcolor = () => {
+    axios.get("http://localhost:5000/getColors")
+      .then(response => {
+        setColorFromdb((prev)=>response.data);
 
-
-
-
-
-const fetchcolor=()=>{
-  axios.get("http://localhost:5000/getColors")
-  .then(response => {
-     setColorFromdb(response.data);
-     
-  })
-  .catch(error => console.error("Error fetching color:", error));
-}
+      })
+      .catch(error => console.error("Error fetching color:", error));
+  }
 
 
 
   return (
-    <WebsiteContext.Provider value={{ logo, setLogo, about, setAbout, updateAboutus, updateLogo, setCarouselImages, uploadCarousel, fetchLastRecord, aboutus, fetchLastLogo, dblogo, carousel, fetchCarouselImages, aboutImage, colorTheme, color, updateColor,colorFromdb,setColorFromdb,fetchcolor }}>
+    <WebsiteContext.Provider value={{ logo, setLogo, about, setAbout, updateAboutus, updateLogo, setCarouselImages, uploadCarousel, fetchLastRecord, aboutus, fetchLastLogo, dblogo, carousel, fetchCarouselImages, aboutImage, colorTheme, color, updateColor, colorFromdb, setColorFromdb, fetchcolor }}>
       {children}
     </WebsiteContext.Provider>
   );

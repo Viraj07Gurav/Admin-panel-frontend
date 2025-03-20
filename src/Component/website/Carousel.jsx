@@ -50,14 +50,14 @@ export default function Carousel() {
   };
 
   return (
-    <div className="relative w-full mx-auto">
+    <div className="relative w-full md:w-6xl lg:w-6xl md:mx-auto lg:mx-auto  mt-18 h-100 ">
       {/* Ensure images array is not empty before accessing currentIndex */}
       {images.length > 0 && (
         <>
           <img
             src={`http://localhost:5000${images[currentIndex]}`} // Append base URL
             alt="Carousel"
-            className="w-full h-50 rounded-lg shadow-md"
+            className="w-full h-full rounded-lg shadow-md"
           />
 
           {/* Left Button */}

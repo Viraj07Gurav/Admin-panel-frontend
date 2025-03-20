@@ -9,13 +9,13 @@ const ProtectedRoute = ({ children,requiredRole }) => {
 
     // If no token is found, redirect to login
     if (!token) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/" />;
     }
 
     // If the user is an admin, allow access
    // If a requiredRole is provided and the user's role doesn't match, redirect to dashboard (or any other default page)
   if (requiredRole && role !== requiredRole) {
-    return <Navigate to="/website" replace />;
+    return <Navigate to="/" replace />;
   }
 
     // If the user is not an admin but authenticated, allow access

@@ -1,10 +1,10 @@
-import React,{useState,useEffect} from 'react'
-import {Link, useNavigate } from 'react-router';
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router';
 
 function UsersData() {
     const [users, setUsers] = useState([]);
     const [count, setCount] = useState(0)
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     useEffect(() => {
         fetch("http://localhost:5000/users")
             .then(res => res.json())
@@ -12,15 +12,15 @@ function UsersData() {
             .catch(err => console.error("Error fetching users:", err));
     }, []);
 
-        // Handle Update User
-        const handleUpdate = (id) => {
-            navigate(`/Users/${id}`);
-        };
+    // Handle Update User
+    const handleUpdate = (id) => {
+        navigate(`/Users/${id}`);
+    };
 
     // Handle Delete User
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
-            await fetch(`http://localhost:5000/users/${id}`, { method: "DELETE" });
+            await fetch(`mysql://root:pMtnCKLtarRCGtxyvjJKMnGmdpMOHErk@mysql.railway.internal:3306/railway/${id}`, { method: "DELETE" });
             setUsers(users.filter(user => user.id !== id)); // Remove user from UI
         }
     };
@@ -54,8 +54,8 @@ function UsersData() {
                 </tbody>
             </table>
             <Link to="/dashboard" className="block text-center w-35 text-blue-500 border-b hover:border-none mt-4 mx-2">
-                        Back to dashboard
-                    </Link>
+                Back to dashboard
+            </Link>
 
         </div>
     )

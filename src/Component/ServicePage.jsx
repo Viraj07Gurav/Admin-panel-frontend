@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import img from '../assets/web.svg'; 
 import img2 from '../assets/app.svg';
 import img3 from '../assets/hosting.svg';
@@ -8,6 +8,25 @@ import WebsiteContext from './context/WebsiteContext';
 const Services = ({color}) => { // accepting props from Mainpage.jsx
     const{colorFromdb}=useContext(WebsiteContext);
     const  bgcolor=localStorage.getItem("bgcolor")
+    const[title,setTitle]=useState("");
+
+    const getService = async () => {
+        try {
+            const response = await fetch("http://localhost:5000/service/1"); // Fetch service with id = 1
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Service Data:", data); // Use this data in your UI
+                setTitle(data);
+            } else {
+                console.log("Service not found");
+            }
+        } catch (error) {
+            console.error("Error fetching service:", error);
+        }
+    };
+    useEffect(()=>{
+        getService();
+    },[])
 
     return (
         <div id="services" className={`${colorFromdb.bgcolor||"bg-gray-100"} py-12`} >
@@ -18,7 +37,7 @@ const Services = ({color}) => { // accepting props from Mainpage.jsx
                         <div className='flex justify-center'>
                             <div className='w-24 border-b-4 border-blue-900'></div>
                         </div>
-                        <h2 className="mt-4 mx-12 text-center text-xl lg:text-2xl font-semibold text-blue-900">We are deeply committed to the growth and success of our clients.</h2>
+                        <h2 className="mt-4 mx-12 text-center text-xl lg:text-2xl font-semibold text-blue-900">{title.title||`We are deeply committed to the growth and success of our clients.`}</h2>
                     </div>
 
                     <div className="px-12" data-aos="fade-down" data-aos-delay="600">

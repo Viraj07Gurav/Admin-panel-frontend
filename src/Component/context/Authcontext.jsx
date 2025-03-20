@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [users, setUsers] = useState([]);
     const [message, setMessage] = useState("Loading...");
+    const BASE_URL="mysql://root:pMtnCKLtarRCGtxyvjJKMnGmdpMOHErk@mysql.railway.internal:3306/railway"
     useEffect(() => {
         axios.get("http://localhost:5000/new")
             .then(response => setMessage(response.data.message))
@@ -74,7 +75,7 @@ export const AuthProvider = ({ children }) => {
             console.log("Attempting login with:", email);
 
             const res = await axios.post("http://localhost:5000/login", { email, password });
-            console.log("reslogin", res)
+            console.log("login response", res)
 
             console.log("Server Response:", res.status, res.data);
 
@@ -124,12 +125,13 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        localStorage.removeItem("user")
         setUser(null);
     };
     /// update delete and get user form db and display in dashboard
     const fetchUsers = async () => {
         try {
-            const response = await fetch("http://localhost:5000/user");
+            const response = await fetch("mysql://root:pMtnCKLtarRCGtxyvjJKMnGmdpMOHErk@mysql.railway.internal:3306/railway/user");
             const data = await response.json();
             console.log("datauser", data)
             setUsers(data);
@@ -143,7 +145,7 @@ export const AuthProvider = ({ children }) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this user?");
         if (confirmDelete) {
             try {
-                await fetch(`http://localhost:5000/users/${id}`, { method: "DELETE" });
+                await fetch(`http://localhost:5000/${id}`, { method: "DELETE" });
                 setUsers(users.filter(user => user.id !== id));
             } catch (error) {
                 console.error("Error deleting user:", error);
@@ -154,7 +156,7 @@ export const AuthProvider = ({ children }) => {
     // Fetch user by ID
     const getUserById = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/getuser/${id}`);
+            const res = await fetch(`http://localhost:5000/${id}`);
             console.log("getuser", res)
             const data = await res.json();
             console.log("data", data)
@@ -168,7 +170,7 @@ export const AuthProvider = ({ children }) => {
     // Update user details
     const updateUser = async (id, updatedUser, navigate) => {
         try {
-            const check = await fetch(`http://localhost:5000/users/${id}`, {
+            const check = await fetch(`http://localhost:5000/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatedUser),

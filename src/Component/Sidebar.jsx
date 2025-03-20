@@ -11,7 +11,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const role = localStorage.getItem("role");
-  const {colorFromdb}=useContext(WebsiteContext);
+  const { colorFromdb } = useContext(WebsiteContext);
 
   // Handle screen resize
   useEffect(() => {
@@ -37,14 +37,14 @@ export default function Sidebar() {
     navigate("/userdata");
   };
 
-  const updatePanel = () => {};
+  const updatePanel = () => { };
 
   const handleLogout = async () => {
     try {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       await logout();
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -55,16 +55,15 @@ export default function Sidebar() {
       <div className="flex">
         {/* Sidebar */}
         <div
-          className={`${colorFromdb.sidebarcolor||"bg-gray-200"} text-black p-5 flex flex-col transition-all duration-300 ${
-            isOpen ? "w-64" : "w-20"
-          }`}
+          className={`${colorFromdb.sidebarcolor || "bg-gray-200"} text-black p-5 flex flex-col transition-all duration-300 ${isOpen ? "w-64" : "w-20"
+            }`}
         >
           <div className="">
-          {/* Toggle Button */}
-          <button className="mb-6 text-black" onClick={() => setIsOpen(!isOpen)}>
-            <Menu size={24} />
-          </button>
-</div>
+            {/* Toggle Button */}
+            <button className="mb-6 text-black" onClick={() => setIsOpen(!isOpen)}>
+              <Menu size={24} />
+            </button>
+          </div>
           {/* User Profile */}
           <div className="flex items-center space-x-2 mb-4">
             <img

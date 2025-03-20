@@ -3,6 +3,7 @@ import websiteContext from '../context/WebsiteContext'
 import UpdateLogoModal from '../modals/UpdateLogo';
 import UpdateCarouselModal from '../modals/UpdateCarousel';
 import UpdateAboutModal from '../modals/UpdateAbout';
+import UpdateService from '../modals/UpdateService';
 
 function Admindashboard() {
     const { setLogo, setAbout, updateAboutus, updateLogo, setCarouselImages, uploadCarousel } = useContext(websiteContext)
@@ -16,7 +17,9 @@ function Admindashboard() {
     const [modalCarousel, setNewCarousel] = useState([]);
     const [isCarouselModalOpen, setIsCarouselModalOpen] = useState(false);
     const [isAboutusModalopen,setIsAboutusModelOpen]=useState(false);
+    const[isServiceModalopen,setIsServiceModalOpen]=useState(false);
     const [aboutus, setNewAboutus] = useState(""); // for aboutus modal
+
 
     
     const openModal = () => {
@@ -35,7 +38,9 @@ function Admindashboard() {
     const closeAboutusModal=()=>{
         setIsAboutusModelOpen(false);
     }
-    console.log("closeCarouselModal",isCarouselModalOpen);
+    const openServiceModal=()=>setIsServiceModalOpen(true)
+    const closeServiceModal=()=>setIsServiceModalOpen(false);
+
     // const handleUpdate = () => {
        
     //     console.log("Alternate Name:", altName);
@@ -151,7 +156,14 @@ function Admindashboard() {
                     </div>
 
                     {/* Card 4, 5, 6: Empty for Future Updates */}
-                    <div className="bg-gray-200 shadow-md p-4 rounded-lg flex items-center justify-center text-gray-500">Empty Card</div>
+                    <div className="bg-white shadow-md p-4 rounded-lg flex flex-col items-center justify-center">
+                    <h3 className="text-lg font-semibold mb-2">Update Footer</h3>
+                    <button onClick={openServiceModal} className="bg-yellow-500 text-white px-4 py-2 w-full  rounded-lg  ">update</button>
+                    <UpdateService
+                    isServiceModalopen={isServiceModalopen}
+                    closeServiceModal={closeServiceModal}
+                    />
+                    </div>
                     <div className="bg-gray-200 shadow-md p-4 rounded-lg flex items-center justify-center text-gray-500">Empty Card</div>
                     <div className="bg-gray-200 shadow-md p-4 rounded-lg flex items-center justify-center text-gray-500">Empty Card</div>
                 </div>

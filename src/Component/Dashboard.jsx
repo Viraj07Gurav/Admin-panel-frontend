@@ -66,7 +66,7 @@ const Dashboard = () => {
     };
     console.log("rightsideBaar", isrightSidebaropen)
     return (
-        <div className="min-h-screen bg-gray-100  ">
+        <div className="min-h-screen bg-gray-100   ">
 
 
             <div className={`max-w-full  mx-auto  ${colorFromdb.bgcolor} rounded-lg shadow-md  relative`}>

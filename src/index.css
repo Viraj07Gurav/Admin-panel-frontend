@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+#admin{
+    background-image: url("../src/assets/adminLogin.png");
+    background-repeat: no-repeat;
+}
+#footer{
+
+    background: url("../src/assets/footer.svg") no-repeat;
+    background-size: cover; 
+}
