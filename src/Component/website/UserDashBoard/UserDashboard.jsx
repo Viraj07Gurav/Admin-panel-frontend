@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useState } from 'react'
 import { Link } from 'react-router';
 import UserSidebar from './UserSidebar';
 import UserRightSidebar from './UserRightSidebar';
-import UserContext from '../../context/userContext';
+import UserContext from '../../context/UserContext';
 
 function UserDashboard() {
     const user = localStorage.getItem("username");
