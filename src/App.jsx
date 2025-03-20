@@ -23,7 +23,8 @@ import UserRoutes from './Component/Routes/UserRoutes'
 import "aos/dist/aos.css";
 import AOS from "aos";
 import AdminLogin from './Component/Admin/AdminLogin'
-import { UserContextProvider } from './Component/context/userContext'
+
+import { UserContextProvider } from "../Component/context/UserContext";
 
 
 function App() {
