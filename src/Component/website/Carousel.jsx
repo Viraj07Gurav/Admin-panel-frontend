@@ -17,7 +17,7 @@ export default function Carousel() {
   // Fetch images from backend
   useEffect(() => {
     axios
-      .get("http://localhost:5000/carousel")
+      .get("https://admin-panel-backend-3g6u.onrender.com/carousel")
       .then((response) => {
         if (response.data && response.data.images.length>0) {
           setImages(response.data.images); // Store fetched images
